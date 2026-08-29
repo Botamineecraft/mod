@@ -26,7 +26,7 @@ public class TaczSoldiersMod {
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
 
-        modEventBus.addListener(this::onEntityAttributeCreation);
+        modEventBus.addListener(this::onEntityAttributeCreationEvent);
         modEventBus.addListener(this::onBuildCreativeModeTabContents);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SoldiersConfig.SPEC, "taczsoldiers-server.toml");

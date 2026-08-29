@@ -34,7 +34,7 @@ public final class SoldiersConfig {
                                 "tacz:uzi",
                                 "tacz:scar_h",
                                 "tacz:glock_17"),
-                        () -> "tacz:ak47");
+                        element -> element instanceof String);
 
         INFINITE_AMMO = builder
                 .comment("When true, soldiers never run out of ammo (their TACZ dummy-ammo reserve is refilled automatically).")
