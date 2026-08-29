@@ -44,9 +44,14 @@
 ## Сборка
 
 Сборка выполняется автоматически в GitHub Actions (`.github/workflows/build.yml`):
-workflow собирает мод Gradle-ом, опционально скачивает TACZ с Modrinth для
-smoke-теста сервера, и кладёт готовый jar и логи в папку `build-output/`
-в этой же ветке.
+workflow собирает мод Gradle-ом, скачивает TACZ с Modrinth, поднимает настоящий
+production-сервер Forge 1.20.1 + TACZ + наш мод, призывает солдата командой
+`summon taczsoldiers:soldier` и проверяет логи. Готовый jar и все логи лежат в
+папке `build-output/` этой ветки:
+
+- `build-output/taczsoldiers-1.0.0.jar` — **готовый мод** (reobf, production);
+- `build-output/server.log` — лог smoke-теста (видно «TACZ API bridge
+  initialized successfully» и «Summoned new Soldier» без ошибок).
 
 Локально (нужен интернет для maven Forge/Mojang):
 
