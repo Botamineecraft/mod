@@ -1,0 +1,150 @@
++ TACZ=false
++ URL=
++ for SLUG in tacz timeless-and-classics-zero tacz-guns
++ echo 'Trying Modrinth slug: tacz'
+Trying Modrinth slug: tacz
+++ curl -sS --max-time 60 https://api.modrinth.com/v2/project/tacz/version
+++ python3 -c '
+import json, sys
+try:
+    vs = json.load(sys.stdin)
+except Exception:
+    sys.exit(0)
+for v in vs:
+    loaders = v.get('\''loaders'\'') or []
+    game_versions = v.get('\''game_versions'\'') or []
+    if '\''forge'\'' in loaders and '\''1.20.1'\'' in game_versions:
+        files = sorted(v.get('\''files'\'', []), key=lambda f: f.get('\''primary'\'', False), reverse=True)
+        if files:
+            print(files[0]['\''url'\''])
+            break
+'
++ URL=
++ '[' -n '' ']'
++ for SLUG in tacz timeless-and-classics-zero tacz-guns
++ echo 'Trying Modrinth slug: timeless-and-classics-zero'
+Trying Modrinth slug: timeless-and-classics-zero
+++ curl -sS --max-time 60 https://api.modrinth.com/v2/project/timeless-and-classics-zero/version
+++ python3 -c '
+import json, sys
+try:
+    vs = json.load(sys.stdin)
+except Exception:
+    sys.exit(0)
+for v in vs:
+    loaders = v.get('\''loaders'\'') or []
+    game_versions = v.get('\''game_versions'\'') or []
+    if '\''forge'\'' in loaders and '\''1.20.1'\'' in game_versions:
+        files = sorted(v.get('\''files'\'', []), key=lambda f: f.get('\''primary'\'', False), reverse=True)
+        if files:
+            print(files[0]['\''url'\''])
+            break
+'
++ URL=https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar
++ '[' -n https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar ']'
++ break
++ echo 'TACZ URL: https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar'
+TACZ URL: https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar
++ '[' -n https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar ']'
++ curl -sSL --max-time 300 -o libs/tacz.jar https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar
++ ls -la libs/tacz.jar
+-rw-r--r-- 1 runner runner 57465167 Aug 29 06:55 libs/tacz.jar
++ TACZ=true
++ echo tacz=true
++ gradle build --no-daemon --stacktrace
++ BUILD_RC=0
++ echo 'gradle build exit code: 0'
+gradle build exit code: 0
++ ls -la build/libs
++ tail -n 80 build-output/build.log
+
+Welcome to Gradle 8.1.1!
+
+Here are the highlights of this release:
+ - Stable configuration cache
+ - Experimental Kotlin DSL assignment syntax
+ - Building with Java 20
+
+For more details see https://docs.gradle.org/8.1.1/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. See https://docs.gradle.org/8.1.1/userguide/gradle_daemon.html#sec:disabling_the_daemon.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Java: 17.0.20.1, JVM: 17.0.20.1+1 (Eclipse Adoptium), Arch: amd64
+files(...) dependencies are not deobfuscated. Use a flatDir repository instead: https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
+Cannot deobfuscate dependency of type DefaultSelfResolvingDependency_Decorated, using obfuscated version!
+
+> Task :compileJava
+Setting up MCP environment
+Initializing steps
+Executing steps
+ > Running 'downloadManifest'
+ > Running 'downloadJson'
+ > Running 'downloadClient'
+ > Running 'downloadServer'
+ > Running 'extractServer'
+ > Running 'downloadClientMappings'
+ > Running 'mergeMappings'
+ > Running 'stripClient'
+ > Running 'stripServer'
+ > Running 'merge'
+ > Running 'listLibraries'
+ > Running 'rename'
+Stopping at requested step: /home/runner/.gradle/caches/forge_gradle/mcp_repo/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/joined/rename/output.jar
+[06:57:08] [main/INFO]: Writing debug log file accesstransform.log
+[06:57:08] [main/INFO]: Access Transformer processor running version 8.2.14
+[06:57:08] [main/INFO]: Command line arguments [--inJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar, --outJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, --logFile, accesstransform.log, --atFile, /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg]
+[06:57:08] [main/INFO]: Reading from /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar
+[06:57:08] [main/INFO]: Writing to /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
+[06:57:08] [main/INFO]: Transformer file /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg
+[06:57:08] [main/WARN]: Found existing output jar /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, overwriting
+[06:57:11] [main/INFO]: JAR transformation complete /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
+Creating SRG -> MCP TSRG
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :processResources
+> Task :classes
+> Task :jar
+> Task :downloadMcpConfig
+> Task :extractSrg
+> Task :createMcpToSrg
+> Task :reobfJar
+> Task :jarJar SKIPPED
+> Task :reobfJarJar SKIPPED
+> Task :assemble
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :check UP-TO-DATE
+> Task :build
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1787986538993.json
+
+BUILD SUCCESSFUL in 2m 2s
+7 actionable tasks: 7 executed
+total 44
+drwxr-xr-x  2 runner runner  4096 Aug 29 06:57 .
+drwxr-xr-x 16 runner runner  4096 Aug 29 06:57 ..
+-rw-r--r--  1 runner runner 35115 Aug 29 06:57 taczsoldiers-1.0.0.jar
++ '[' true = true ']'
++ '[' 0 = 0 ']'
++ mkdir -p run
++ echo eula=true
++ timeout 420 gradle runServer --no-daemon
++ true
++ echo '--- server log markers ---'
+--- server log markers ---
++ grep -E 'Done|ERROR|FATAL|Exception|taczsoldiers' build-output/server.log
++ head -80
+[06:57:56] [main/FATAL] [mixin/]: Mixin apply failed tacz.mixins.json:common.LivingEntityMixin -> net.minecraft.world.entity.LivingEntity: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException Critical injection failure: @Inject annotation on onTickServerSide could not find any targets matching 'Lnet/minecraft/world/entity/LivingEntity;m_8119_()V' in net.minecraft.world.entity.LivingEntity. Using refmap tacz.refmap.json [PREINJECT Applicator Phase -> tacz.mixins.json:common.LivingEntityMixin -> Prepare Injections ->  -> handler$zza000$onTickServerSide(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V -> Parse]
+org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @Inject annotation on onTickServerSide could not find any targets matching 'Lnet/minecraft/world/entity/LivingEntity;m_8119_()V' in net.minecraft.world.entity.LivingEntity. Using refmap tacz.refmap.json [PREINJECT Applicator Phase -> tacz.mixins.json:common.LivingEntityMixin -> Prepare Injections ->  -> handler$zza000$onTickServerSide(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V -> Parse]
+Exception in thread "main" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+Caused by: java.lang.reflect.InvocationTargetException
+Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @Inject annotation on onTickServerSide could not find any targets matching 'Lnet/minecraft/world/entity/LivingEntity;m_8119_()V' in net.minecraft.world.entity.LivingEntity. Using refmap tacz.refmap.json [PREINJECT Applicator Phase -> tacz.mixins.json:common.LivingEntityMixin -> Prepare Injections ->  -> handler$zza000$onTickServerSide(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V -> Parse]
++ git config user.name arena-build-bot
++ git config user.email arena-build-bot@users.noreply.github.com
++ cp -f build/libs/taczsoldiers-1.0.0.jar build-output/
++ rm -f libs/tacz.jar
++ git add -f build-output
