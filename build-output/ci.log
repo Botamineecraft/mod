@@ -148,3 +148,169 @@ Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionExce
 + cp -f build/libs/taczsoldiers-1.0.0.jar build-output/
 + rm -f libs/tacz.jar
 + git add -f build-output
++ TACZ=false
++ URL=
++ for SLUG in tacz timeless-and-classics-zero tacz-guns
++ echo 'Trying Modrinth slug: tacz'
+Trying Modrinth slug: tacz
+++ curl -sS --max-time 60 https://api.modrinth.com/v2/project/tacz/version
+++ python3 -c '
+import json, sys
+try:
+    vs = json.load(sys.stdin)
+except Exception:
+    sys.exit(0)
+for v in vs:
+    loaders = v.get('\''loaders'\'') or []
+    game_versions = v.get('\''game_versions'\'') or []
+    if '\''forge'\'' in loaders and '\''1.20.1'\'' in game_versions:
+        files = sorted(v.get('\''files'\'', []), key=lambda f: f.get('\''primary'\'', False), reverse=True)
+        if files:
+            print(files[0]['\''url'\''])
+            break
+'
++ URL=
++ '[' -n '' ']'
++ for SLUG in tacz timeless-and-classics-zero tacz-guns
++ echo 'Trying Modrinth slug: timeless-and-classics-zero'
+Trying Modrinth slug: timeless-and-classics-zero
+++ curl -sS --max-time 60 https://api.modrinth.com/v2/project/timeless-and-classics-zero/version
+++ python3 -c '
+import json, sys
+try:
+    vs = json.load(sys.stdin)
+except Exception:
+    sys.exit(0)
+for v in vs:
+    loaders = v.get('\''loaders'\'') or []
+    game_versions = v.get('\''game_versions'\'') or []
+    if '\''forge'\'' in loaders and '\''1.20.1'\'' in game_versions:
+        files = sorted(v.get('\''files'\'', []), key=lambda f: f.get('\''primary'\'', False), reverse=True)
+        if files:
+            print(files[0]['\''url'\''])
+            break
+'
++ URL=https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar
++ '[' -n https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar ']'
++ break
++ echo 'TACZ URL: https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar'
+TACZ URL: https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar
++ '[' -n https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar ']'
++ curl -sSL --max-time 300 -o libs/tacz.jar https://cdn.modrinth.com/data/SzzJttH8/versions/yOVIzIJR/tacz-1.20.1-1.1.8-hotfix.jar
++ ls -la libs/tacz.jar
+-rw-r--r-- 1 runner runner 57465167 Aug 29 06:59 libs/tacz.jar
++ TACZ=true
++ echo tacz=true
++ gradle build --no-daemon --stacktrace
++ BUILD_RC=0
++ echo 'gradle build exit code: 0'
+gradle build exit code: 0
++ ls -la build/libs
++ tail -n 80 build-output/build.log
+
+Welcome to Gradle 8.1.1!
+
+Here are the highlights of this release:
+ - Stable configuration cache
+ - Experimental Kotlin DSL assignment syntax
+ - Building with Java 20
+
+For more details see https://docs.gradle.org/8.1.1/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. See https://docs.gradle.org/8.1.1/userguide/gradle_daemon.html#sec:disabling_the_daemon.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Java: 17.0.20.1, JVM: 17.0.20.1+1 (Eclipse Adoptium), Arch: amd64
+files(...) dependencies are not deobfuscated. Use a flatDir repository instead: https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
+Cannot deobfuscate dependency of type DefaultSelfResolvingDependency_Decorated, using obfuscated version!
+
+> Task :compileJava
+Setting up MCP environment
+Initializing steps
+Executing steps
+ > Running 'downloadManifest'
+ > Running 'downloadJson'
+ > Running 'downloadClient'
+ > Running 'downloadServer'
+ > Running 'extractServer'
+ > Running 'downloadClientMappings'
+ > Running 'mergeMappings'
+ > Running 'stripClient'
+ > Running 'stripServer'
+ > Running 'merge'
+ > Running 'listLibraries'
+ > Running 'rename'
+Stopping at requested step: /home/runner/.gradle/caches/forge_gradle/mcp_repo/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/joined/rename/output.jar
+[07:00:57] [main/INFO]: Writing debug log file accesstransform.log
+[07:00:57] [main/INFO]: Access Transformer processor running version 8.2.14
+[07:00:57] [main/INFO]: Command line arguments [--inJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar, --outJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, --logFile, accesstransform.log, --atFile, /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg]
+[07:00:57] [main/INFO]: Reading from /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar
+[07:00:57] [main/INFO]: Writing to /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
+[07:00:57] [main/INFO]: Transformer file /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg
+[07:00:57] [main/WARN]: Found existing output jar /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, overwriting
+[07:01:00] [main/INFO]: JAR transformation complete /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
+Creating SRG -> MCP TSRG
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :processResources
+> Task :classes
+> Task :jar
+> Task :downloadMcpConfig
+> Task :extractSrg
+> Task :createMcpToSrg
+> Task :reobfJar
+> Task :jarJar SKIPPED
+> Task :reobfJarJar SKIPPED
+> Task :assemble
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :check UP-TO-DATE
+> Task :build
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1787986787883.json
+
+BUILD SUCCESSFUL in 1m 36s
+7 actionable tasks: 7 executed
+total 44
+drwxr-xr-x  2 runner runner  4096 Aug 29 07:01 .
+drwxr-xr-x 16 runner runner  4096 Aug 29 07:01 ..
+-rw-r--r--  1 runner runner 35115 Aug 29 07:01 taczsoldiers-1.0.0.jar
++ '[' true = true ']'
++ '[' 0 = 0 ']'
++ FORGE_VER=1.20.1-47.3.0
++ cp -f libs/tacz.jar /tmp/tacz.jar
++ mkdir -p mcserver
++ cd mcserver
++ curl -sSL --max-time 300 -o /tmp/forge-installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-installer.jar
++ '[' -f /tmp/forge-installer.jar ']'
++ java -jar /tmp/forge-installer.jar --installServer
++ echo eula=true
++ mkdir -p mods
++ cp -f ../build-output/taczsoldiers-1.0.0.jar mods/
++ cp -f /tmp/tacz.jar mods/
++ sleep 90
++ timeout 300 ./run.sh
++ echo 'summon taczsoldiers:soldier ~ ~ ~'
++ sleep 25
++ echo stop
++ echo '--- server log markers ---'
+--- server log markers ---
++ grep -E 'Done|FATAL|taczsoldiers|TaczBridge|Exception' ../build-output/server.log
++ head -100
+[07:01:43] [modloading-worker-0/INFO] [taczsoldiers/]: TACZ Soldiers loaded. Soldiers will use TACZ guns when the 'tacz' mod is present.
+java.nio.file.NoSuchFileException: server.properties
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:92) ~[?:?] {}
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106) ~[?:?] {}
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111) ~[?:?] {}
+[07:01:47] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/taczsoldiers-server.toml is not correct. Correcting
+[07:02:11] [Server thread/INFO] [minecraft/DedicatedServer]: Done (24.293s)! For help, type "help"
+[07:03:05] [Server thread/INFO] [taczsoldiers/TaczBridge/]: TACZ API bridge initialized successfully.
++ cd ..
++ git config user.name arena-build-bot
++ git config user.email arena-build-bot@users.noreply.github.com
++ cp -f build/libs/taczsoldiers-1.0.0.jar build-output/
++ rm -f libs/tacz.jar
++ git add -f build-output
