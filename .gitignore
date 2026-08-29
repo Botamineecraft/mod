@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+build/
+out/
+run/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.vscode/
+bin/
+
+# Mod dev
+libs/tacz.jar
+logs/
+crash-reports/

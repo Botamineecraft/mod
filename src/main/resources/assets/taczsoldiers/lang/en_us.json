@@ -1,0 +1,6 @@
+{
+  "entity.taczsoldiers.soldier": "Soldier",
+  "item.taczsoldiers.soldier_spawn_egg": "Soldier Spawn Egg",
+  "message.taczsoldiers.guard_on": "Soldier: guarding this position",
+  "message.taczsoldiers.guard_off": "Soldier: patrolling freely"
+}

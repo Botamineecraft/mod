@@ -1,0 +1,6 @@
+{
+  "entity.taczsoldiers.soldier": "Солдат",
+  "item.taczsoldiers.soldier_spawn_egg": "Яйцо призыва солдата",
+  "message.taczsoldiers.guard_on": "Солдат: охраняет эту позицию",
+  "message.taczsoldiers.guard_off": "Солдат: свободно патрулирует"
+}
