@@ -54,14 +54,35 @@ ls -la build/libs >> build-output/build.log 2>&1
 tail -n 80 build-output/build.log
 
 # ---------------------------------------------------------------------------
-# 3) Optional runtime smoke test: run a Forge dev server with TACZ + our mod
+# 3) Optional runtime smoke test: real PRODUCTION Forge server
+#    (forge installer + mods folder with the reobfed jar + TACZ jar),
+#    then summon a soldier from the server console.
 # ---------------------------------------------------------------------------
 if [ "${TACZ}" = "true" ] && [ "${BUILD_RC}" = "0" ]; then
-    mkdir -p run
-    echo "eula=true" > run/eula.txt
-    ( timeout 420 gradle runServer --no-daemon > build-output/server.log 2>&1 || true )
-    echo "--- server log markers ---"
-    grep -E "Done|ERROR|FATAL|Exception|taczsoldiers" build-output/server.log | head -80 || true
+    FORGE_VER="1.20.1-47.3.0"
+    cp -f libs/tacz.jar /tmp/tacz.jar
+    mkdir -p mcserver
+    cd mcserver || true
+    curl -sSL --max-time 300 -o /tmp/forge-installer.jar \
+        "https://maven.minecraftforge.net/net/minecraftforge/forge/${FORGE_VER}/forge-${FORGE_VER}-installer.jar" || true
+    if [ -f /tmp/forge-installer.jar ]; then
+        java -jar /tmp/forge-installer.jar --installServer > ../build-output/server-install.log 2>&1 || true
+        echo "eula=true" > eula.txt
+        mkdir -p mods
+        cp -f ../build-output/taczsoldiers-1.0.0.jar mods/
+        cp -f /tmp/tacz.jar mods/
+        {
+            sleep 90
+            echo "summon taczsoldiers:soldier ~ ~ ~"
+            sleep 25
+            echo "stop"
+        } | timeout 300 ./run.sh > ../build-output/server.log 2>&1 || true
+        echo "--- server log markers ---"
+        grep -E "Done|FATAL|taczsoldiers|TaczBridge|Exception" ../build-output/server.log | head -100 || true
+    else
+        echo "Could not download the Forge installer; smoke test skipped."
+    fi
+    cd ..
 fi
 
 # ---------------------------------------------------------------------------
