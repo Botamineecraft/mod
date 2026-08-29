@@ -64,7 +64,6 @@ public class SoldierEntity extends PathfinderMob {
         super(type, level);
         this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DANGER_FIRE, 16.0F);
         this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DAMAGE_FIRE, -1.0F);
-        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DANGER_CACTUS, -1.0F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -101,9 +100,7 @@ public class SoldierEntity extends PathfinderMob {
                                         MobSpawnType reason, @Nullable SpawnGroupData spawnData,
                                         @Nullable CompoundTag dataTag) {
         SpawnGroupData data = super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
-        if (reason != MobSpawnType.LOAD) {
-            this.equip();
-        }
+        this.equip();
         return data;
     }
 

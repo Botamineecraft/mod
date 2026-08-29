@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 public class ModSpawnEggItem extends SpawnEggItem {
     private final Supplier<EntityType<? extends Mob>> typeSupplier;
 
-    public ModSpawnEggItem(Supplier<EntityType<? extends Mob>> typeSupplier, int backgroundColor, int highlightColor, Properties properties) {
+    public ModSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> typeSupplier, int backgroundColor, int highlightColor, Properties properties) {
         super(null, backgroundColor, highlightColor, properties);
         this.typeSupplier = typeSupplier;
     }
