@@ -31,35 +31,26 @@ Executing steps
  > Running 'listLibraries'
  > Running 'rename'
 Stopping at requested step: /home/runner/.gradle/caches/forge_gradle/mcp_repo/de/oceanlabs/mcp/mcp_config/1.20.1-20230612.114412/joined/rename/output.jar
-[06:48:02] [main/INFO]: Writing debug log file accesstransform.log
-[06:48:02] [main/INFO]: Access Transformer processor running version 8.2.14
-[06:48:02] [main/INFO]: Command line arguments [--inJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar, --outJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, --logFile, accesstransform.log, --atFile, /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg]
-[06:48:02] [main/INFO]: Reading from /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar
-[06:48:02] [main/INFO]: Writing to /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
-[06:48:02] [main/INFO]: Transformer file /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg
-[06:48:02] [main/WARN]: Found existing output jar /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, overwriting
-[06:48:05] [main/INFO]: JAR transformation complete /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
+[06:52:05] [main/INFO]: Writing debug log file accesstransform.log
+[06:52:05] [main/INFO]: Access Transformer processor running version 8.2.14
+[06:52:05] [main/INFO]: Command line arguments [--inJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar, --outJar, /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, --logFile, accesstransform.log, --atFile, /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg]
+[06:52:05] [main/INFO]: Reading from /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-injected.jar
+[06:52:05] [main/INFO]: Writing to /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
+[06:52:05] [main/INFO]: Transformer file /home/runner/work/mod/mod/build/_atJar_4/parent_at.cfg
+[06:52:05] [main/WARN]: Found existing output jar /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar, overwriting
+[06:52:07] [main/INFO]: JAR transformation complete /home/runner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.0_mapped_official_1.20.1/forge-1.20.1-47.3.0_mapped_official_1.20.1.jar
 Creating SRG -> MCP TSRG
-/home/runner/work/mod/mod/src/main/java/com/botamineecraft/taczsoldiers/entity/SoldierEntity.java:67: error: cannot find symbol
-        this.setPathfindingMalus(net.minecraft.world.level.pathfinder.BlockPathTypes.DANGER_CACTUS, -1.0F);
-                                                                                    ^
-  symbol:   variable DANGER_CACTUS
-  location: class BlockPathTypes
-/home/runner/work/mod/mod/src/main/java/com/botamineecraft/taczsoldiers/entity/SoldierEntity.java:104: error: cannot find symbol
-        if (reason != MobSpawnType.LOAD) {
-                                  ^
-  symbol:   variable LOAD
-  location: class MobSpawnType
-/home/runner/work/mod/mod/src/main/java/com/botamineecraft/taczsoldiers/init/ModItems.java:15: error: incompatible types: RegistryObject<EntityType<SoldierEntity>> cannot be converted to Supplier<EntityType<? extends Mob>>
-            () -> new ModSpawnEggItem(ModEntities.SOLDIER, 0x4B5320, 0xBDB76B, new Item.Properties()));
-                                                 ^
+/home/runner/work/mod/mod/src/main/java/com/botamineecraft/taczsoldiers/item/ModSpawnEggItem.java:20: error: incompatible types: Supplier<CAP#1> cannot be converted to Supplier<EntityType<? extends Mob>>
+        this.typeSupplier = typeSupplier;
+                            ^
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends EntityType<? extends Mob> from capture of ? extends EntityType<? extends Mob>
 Note: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
-Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-3 errors
+1 error
 
 > Task :compileJava FAILED
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1787986009676.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1787986251895.json
 
 FAILURE: Build failed with an exception.
 
@@ -257,6 +248,6 @@ Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Com
 
 * Get more help at https://help.gradle.org
 
-BUILD FAILED in 1m 35s
+BUILD FAILED in 1m 30s
 1 actionable task: 1 executed
 ls: cannot access 'build/libs': No such file or directory
