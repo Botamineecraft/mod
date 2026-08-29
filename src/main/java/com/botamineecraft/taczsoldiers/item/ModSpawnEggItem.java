@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  * before the entity type exists (DeferredRegister friendly).
  */
 public class ModSpawnEggItem extends SpawnEggItem {
-    private final Supplier<EntityType<? extends Mob>> typeSupplier;
+    private final Supplier<? extends EntityType<? extends Mob>> typeSupplier;
 
     public ModSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> typeSupplier, int backgroundColor, int highlightColor, Properties properties) {
         super(null, backgroundColor, highlightColor, properties);

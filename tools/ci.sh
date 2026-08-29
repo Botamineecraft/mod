@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 # CI driver for the TACZ Soldiers mod build (runs on GitHub Actions runners).
 # All build logic lives here so that the workflow file never needs updating.
-set -x
-
 mkdir -p build-output libs
+exec > >(tee -a build-output/ci.log) 2>&1
+set -x
 
 # ---------------------------------------------------------------------------
 # 1) Optional: download TACZ (Forge, 1.20.1) from Modrinth for a runtime smoke test
 # ---------------------------------------------------------------------------
 TACZ=false
-URL=$(curl -sS --max-time 60 'https://api.modrinth.com/v2/project/tacz/version' | python3 - <<'PY'
+URL=""
+for SLUG in tacz timeless-and-classics-zero tacz-guns; do
+  echo "Trying Modrinth slug: ${SLUG}"
+  URL=$(curl -sS --max-time 60 "https://api.modrinth.com/v2/project/${SLUG}/version" | python3 -c "
 import json, sys
 try:
     vs = json.load(sys.stdin)
@@ -23,8 +26,9 @@ for v in vs:
         if files:
             print(files[0]['url'])
             break
-PY
-) || URL=""
+") || URL=""
+  [ -n "${URL}" ] && break
+done
 echo "TACZ URL: ${URL}"
 
 if [ -n "${URL}" ]; then
